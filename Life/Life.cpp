@@ -9,8 +9,9 @@
 #include <Windows.h>
 
 
-int oldfield[500][500];
-int newfield[500][500];
+
+static int oldfield[650][550];
+static int newfield[650][550];
 //Generates random numbers
 double decrandom(){
 	double ran; 
@@ -33,11 +34,10 @@ int binrandom(){
 //Initializes field of cells using random numbers provided by binrandom()
 void fieldStp(){
 	int x, y;
-	int field[500][500];
-	for (x = 0; x <= 499; x = x + 1){
-		for (y = 0; y <= 499; y = y + 1){
-			field[x][y] = binrandom();
-			oldfield[x][y] = field[x][y];
+	for (x = 0; x <= 649; x = x + 1){
+		for (y = 0; y <= 549; y = y + 1){
+			oldfield[x][y] = binrandom();
+			
 		}
 	}
 }
@@ -45,8 +45,8 @@ void fieldStp(){
 //Sets all cells to their new state
 void fieldref(){
 	int sum;
-	for (int x = 0; x <= 499; x = x + 1){
-		for (int y = 0; y <= 499; y = y + 1){
+	for (int x = 0; x <= 649; x = x + 1){
+		for (int y = 0; y <= 549; y = y + 1){
 			sum = oldfield[x + 1][y] + oldfield[x - 1][y] + oldfield[x][y + 1] + oldfield[x][y - 1] + oldfield[x + 1][y + 1] + oldfield[x - 1][y + 1] + oldfield[x - 1][y - 1] + oldfield[x + 1][y - 1];
 			//This is where rules are applied 
 			if (sum >3 || sum < 2){
@@ -63,9 +63,9 @@ void fieldref(){
 			//This is where rule part ends
 		}
 	}
-
-	for (int x = 0; x <= 499; x = x + 1){
-		for (int y = 0; y <= 499; y = y + 1){
+	//Copies values from newfield[x][y] to oldfield[x][y]
+	for (int x = 0; x <= 649; x = x + 1){
+		for (int y = 0; y <= 549; y = y + 1){
 			oldfield[x][y] = newfield[x][y];
 		}
 	}
@@ -76,7 +76,7 @@ int main(int argc, char **argv){
 	fieldStp();
 	SDL_Init(SDL_INIT_EVERYTHING);
 	SDL_Window* window = NULL;
-	window = SDL_CreateWindow("Life", 100, 100, 1000, 1000, SDL_WINDOW_SHOWN);
+	window = SDL_CreateWindow("Life", 100, 100, 1280, 1024, SDL_WINDOW_SHOWN);
 	if (window == NULL){
 		printf("ERROR Window creation failed");
 		return 0;
@@ -90,15 +90,16 @@ int main(int argc, char **argv){
 	dead = IMG_LoadTexture(renderer, "dead.jpg");
 	SDL_Rect replicator_rect;
 	SDL_Rect dead_rect;
+	//Primary loop follows
 	while (quit == false && mainEvent->type != SDL_QUIT){
 		int x, y;
 
 		SDL_PollEvent(mainEvent);
 		SDL_RenderClear(renderer);
 		fieldref();
-
-		for (x = 0; x <= 499; x = x + 1){
-			for (y = 0; y <= 499; y = y + 1){
+		//Renders new state of cellular automaton
+		for (x = 0; x <= 649; x = x + 1){
+			for (y = 0; y <= 549; y = y + 1){
 				if (oldfield[x][y] == 1){
 					replicator_rect.x = 2 * x;
 					replicator_rect.y = 2 * y;
