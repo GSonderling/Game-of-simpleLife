@@ -4,12 +4,12 @@ This project is a simple implementation of cellular automaton known as Game of L
 It is meant to serve as introduction to simple deterministic cellular automata for begginners.
 
 
-## What I want to add
+## To Do list
 
 1. Proper way for exiting the program (because clicking X is antediluvian)
 2. Interface for choosing rules from several presets
 3. Interface for choosing size of field
-4. Increase efficiency
+
 
 I used SDL(Simple DirectMedia Layer) for graphics.
 
