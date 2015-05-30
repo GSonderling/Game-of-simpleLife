@@ -3,7 +3,7 @@
 This simple project uses SDL or Simple DirectMedia Layer for graphics.
 
 -----------------------------------------------------------------------------------------------------------------------------
-Followin is license for use of Simple DirectMedia Layer:
+Following is license for use of Simple DirectMedia Layer:
 
 This software is provided 'as-is', without any express or implied
 warranty.  In no event will the authors be held liable for any damages
