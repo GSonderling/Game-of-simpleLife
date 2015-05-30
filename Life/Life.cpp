@@ -31,7 +31,7 @@ int binrandom(){
 }
 
 //Initializes field of cells using random numbers provided by binrandom()
-int fieldStp(){
+void fieldStp(){
 	int x, y;
 	int field[500][500];
 	for (x = 0; x <= 499; x = x + 1){
@@ -40,7 +40,6 @@ int fieldStp(){
 			oldfield[x][y] = field[x][y];
 		}
 	}
-	return 0;
 }
 
 //Sets all cells to their new state
@@ -64,6 +63,7 @@ void fieldref(){
 			//This is where rule part ends
 		}
 	}
+
 	for (int x = 0; x <= 499; x = x + 1){
 		for (int y = 0; y <= 499; y = y + 1){
 			oldfield[x][y] = newfield[x][y];
@@ -97,33 +97,22 @@ int main(int argc, char **argv){
 		SDL_RenderClear(renderer);
 		fieldref();
 
-
-			for (x = 0; x <= 499; x = x + 1){
+		for (x = 0; x <= 499; x = x + 1){
 			for (y = 0; y <= 499; y = y + 1){
 				if (oldfield[x][y] == 1){
 					replicator_rect.x = 2 * x;
 					replicator_rect.y = 2 * y;
 					replicator_rect.w = 2;
 					replicator_rect.h = 2;
-	                SDL_RenderCopy(renderer, replicator, NULL, &replicator_rect);
+					SDL_RenderCopy(renderer, replicator, NULL, &replicator_rect);
 				}
-				if (oldfield[x][y] == 0){
-					dead_rect.x = 2 * x;
-					dead_rect.y = 2 * y;
-					dead_rect.w = 2;
-					dead_rect.h = 2;
-				    SDL_RenderCopy(renderer, dead, NULL, &dead_rect);
-
-				}
-			
-
 			}
 		}
 
 		SDL_RenderPresent(renderer);
-		Sleep(1);
-
+		Sleep(20);
 	}
+
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
 	delete mainEvent;
