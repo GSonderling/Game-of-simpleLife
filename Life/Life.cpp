@@ -11,11 +11,13 @@
 
 int oldfield[500][500];
 int newfield[500][500];
+//Generates random numbers
 double decrandom(){
 	double ran; 
 	ran = (float) rand()/RAND_MAX;
 	return ran;
 }
+//Generates random numbers from 0 to 1
 int binrandom(){
 	int ran;
 	ran = rand();
@@ -27,6 +29,8 @@ int binrandom(){
 	}
 	return ran;
 }
+
+//Initializes field of cells using random numbers provided by binrandom()
 int fieldStp(){
 	int x, y;
 	int field[500][500];
@@ -38,11 +42,14 @@ int fieldStp(){
 	}
 	return 0;
 }
-int fieldref(){
+
+//Sets all cells to their new state
+void fieldref(){
 	int sum;
 	for (int x = 0; x <= 499; x = x + 1){
 		for (int y = 0; y <= 499; y = y + 1){
 			sum = oldfield[x + 1][y] + oldfield[x - 1][y] + oldfield[x][y + 1] + oldfield[x][y - 1] + oldfield[x + 1][y + 1] + oldfield[x - 1][y + 1] + oldfield[x - 1][y - 1] + oldfield[x + 1][y - 1];
+			//This is where rules are applied 
 			if (sum >3 || sum < 2){
 				newfield[x][y] = 0;
 			}
@@ -54,6 +61,7 @@ int fieldref(){
 			if ((sum == 2 || sum == 3) && oldfield[x][y] == 1){
 				newfield[x][y] = oldfield[x][y];
 			}
+			//This is where rule part ends
 		}
 	}
 	for (int x = 0; x <= 499; x = x + 1){
@@ -61,7 +69,7 @@ int fieldref(){
 			oldfield[x][y] = newfield[x][y];
 		}
 	}
-	return 0;
+	
 }
 int main(int argc, char **argv){
 	bool quit = false;
@@ -113,7 +121,7 @@ int main(int argc, char **argv){
 		}
 
 		SDL_RenderPresent(renderer);
-		Sleep(100);
+		Sleep(1);
 
 	}
 	SDL_DestroyWindow(window);
