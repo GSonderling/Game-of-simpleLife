@@ -1,15 +1,8 @@
 # Game-of-simpleLife
 
 This project is a simple implementation of cellular automaton known as Game of Life written in C++.
+
 It is meant to serve as introduction to simple deterministic cellular automata for begginners.
-
-
-## To Do list
-
-1. Proper way for exiting the program (because clicking X is antediluvian)
-2. Interface for choosing rules from several presets
-3. Interface for choosing size of field
-
 
 I used SDL(Simple DirectMedia Layer) for graphics.
 
